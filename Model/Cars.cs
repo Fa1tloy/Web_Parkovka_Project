@@ -7,7 +7,7 @@ namespace Web_Parkovka_Project.Model
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Требуется номер автомобиля.")]
-        [StringLength(10, ErrorMessage = "номер не может быть длиннее 10 символов.")]
+        [StringLength(10, ErrorMessage = "Номер автомобиля не может быть длиннее 10 символов.")]
         public required string Number { get; set; }
 
         [Required(ErrorMessage = "Требуется название модели автомобиля.")]
