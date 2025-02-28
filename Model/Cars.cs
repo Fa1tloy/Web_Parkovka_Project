@@ -18,12 +18,8 @@ namespace Web_Parkovka_Project.Model
         [StringLength(50, ErrorMessage = "Цвет не может быть длиннее 50 символов.")]
         public required string Colour { get; set; }
 
-        [Required(ErrorMessage = "Требуется ID владельца.")]
-        [StringLength(6, ErrorMessage = "ID не может быть длиннее 6 символов.")]
         public required int OwnerId { get; set; }
 
-        [Required(ErrorMessage = "Требуется Ф.И.О владельца.")]
-        [StringLength(80, ErrorMessage = "Ф.И.О не может быть длиннее 80 символов.")]
         public required Owner Owner { get; set; }
     }
 }
