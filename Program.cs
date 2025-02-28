@@ -1,7 +1,15 @@
+
+
+using Microsoft.EntityFrameworkCore;
+using Web_Parkovka_Project.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ParkingBD")));
 
 var app = builder.Build();
 
