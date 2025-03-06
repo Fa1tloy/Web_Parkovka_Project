@@ -11,7 +11,7 @@ namespace Web_Parkovka_Project.Model
         public required ParkingPlaces ParkingPlace { get; set; }
         public DateTime Entrance { get; set; }
         public DateTime Exit { get; set; }
-        public double Payment { get; set; }
+        public double Payment { get; set; } 
     }
 }
 
