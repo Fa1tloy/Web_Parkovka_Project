@@ -9,9 +9,9 @@ namespace Web_Parkovka_Project.Model
         public required Cars Car { get; set; }
         public int ParkingPlacesId { get; set; }
         public required ParkingPlaces ParkingPlace { get; set; }
-        public DateTime Entrance { get; set; } = DateTime.Now;
+        public DateTime Entrance { get; set; }
         public DateTime Exit { get; set; }
-        public int Payment { get; set; }
+        public double Payment { get; set; } 
     }
 }
 
