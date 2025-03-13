@@ -4,14 +4,13 @@ using Web_Parkovka_Project.Data;
 using Web_Parkovka_Project.Model;
 using System;
 
-
-namespace StudentLibrary.Pages
+namespace Web_Parkovka_Project.Pages
 {
-    public class CarModel : PageModel
+    public class ParkingInformationModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public CarModel(ApplicationDbContext context)
+        public ParkingInformationModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,7 +26,7 @@ namespace StudentLibrary.Pages
             }
             else
             {
-                Car = new Cars() { Id = 0 , Number = "" , Model = "", Colour = "", OwnerId = 0 ,Owner   };
+                Car = new Cars() { Id = 0 , Number = "" , Colour = "", Model = "", Owner = new Owner { Email = "", Id = 0 , Name = "", Phone = ""}, OwnerId = 0};
             }
         }
 
@@ -37,16 +36,16 @@ namespace StudentLibrary.Pages
             {
                 return Page();
             }
-            if (Cars.Id == 0)
+            if (Car.Id == 0)
             {
-                _context.Books.Add(Book);
+                _context.Cars.Add(Car);
             }
             else
             {
-                _context.Books.Update(Book);
+                _context.Cars.Update(Car);
             }
             _context.SaveChanges();
-            return RedirectToPage("Books");
+            return RedirectToPage("Cars");
         }
     }
 }
