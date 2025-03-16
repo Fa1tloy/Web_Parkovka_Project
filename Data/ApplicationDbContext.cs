@@ -17,9 +17,9 @@ namespace Web_Parkovka_Project.Data
             //Database.Migrate(); // Автоматически применяет миграции и создаёт базу, если её нет
         }
 
-        public DbSet<Cars> Cars { get; set; }
-        public DbSet<Owner> Owners { get; set; }
-        public DbSet<ParkingPlaces> ParkingPlaces { get; set; }
-        public DbSet<ParkingRecords> ParkingRecords { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Vehicle> Vehicle { get; set; }
+        public DbSet<ParkingSpot> ParkingSpot { get; set; }
+        public DbSet<Reservation> ParkingRecords { get; set; }
     }
 }
