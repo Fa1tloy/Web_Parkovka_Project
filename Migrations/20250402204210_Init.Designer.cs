@@ -12,7 +12,7 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250327054131_Init")]
+    [Migration("20250402204210_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -39,14 +39,14 @@ namespace Web_Parkovka_Project.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VehicleId")
+                    b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("ParkingSpot");
+                    b.ToTable("ParkingSpots");
                 });
 
             modelBuilder.Entity("Web_Parkovka_Project.Model.Reservation", b =>
@@ -78,7 +78,7 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("ParkingRecords");
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("Web_Parkovka_Project.Model.User", b =>
@@ -111,7 +111,7 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Web_Parkovka_Project.Model.Vehicle", b =>
@@ -141,14 +141,16 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Vehicle");
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("Web_Parkovka_Project.Model.ParkingSpot", b =>
                 {
                     b.HasOne("Web_Parkovka_Project.Model.Vehicle", "OccupiedBy")
-                        .WithMany("ParkedAtSpots")
-                        .HasForeignKey("VehicleId");
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OccupiedBy");
                 });
@@ -186,11 +188,6 @@ namespace Web_Parkovka_Project.Migrations
             modelBuilder.Entity("Web_Parkovka_Project.Model.User", b =>
                 {
                     b.Navigation("Vehicles");
-                });
-
-            modelBuilder.Entity("Web_Parkovka_Project.Model.Vehicle", b =>
-                {
-                    b.Navigation("ParkedAtSpots");
                 });
 #pragma warning restore 612, 618
         }

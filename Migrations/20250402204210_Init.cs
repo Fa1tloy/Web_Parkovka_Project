@@ -12,7 +12,7 @@ namespace Web_Parkovka_Project.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -25,11 +25,11 @@ namespace Web_Parkovka_Project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vehicle",
+                name: "Vehicles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -41,37 +41,38 @@ namespace Web_Parkovka_Project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vehicle", x => x.Id);
+                    table.PrimaryKey("PK_Vehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicle_User_OwnerId",
+                        name: "FK_Vehicles_Users_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ParkingSpot",
+                name: "ParkingSpots",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<int>(type: "int", nullable: false),
                     IsOccupied = table.Column<bool>(type: "bit", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: true)
+                    VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ParkingSpot", x => x.Id);
+                    table.PrimaryKey("PK_ParkingSpots", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ParkingSpot_Vehicle_VehicleId",
+                        name: "FK_ParkingSpots_Vehicles_VehicleId",
                         column: x => x.VehicleId,
-                        principalTable: "Vehicle",
-                        principalColumn: "Id");
+                        principalTable: "Vehicles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ParkingRecords",
+                name: "Reservations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -84,39 +85,39 @@ namespace Web_Parkovka_Project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ParkingRecords", x => x.Id);
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ParkingRecords_ParkingSpot_ReservedSpotId",
+                        name: "FK_Reservations_ParkingSpots_ReservedSpotId",
                         column: x => x.ReservedSpotId,
-                        principalTable: "ParkingSpot",
+                        principalTable: "ParkingSpots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ParkingRecords_Vehicle_VehicleId",
+                        name: "FK_Reservations_Vehicles_VehicleId",
                         column: x => x.VehicleId,
-                        principalTable: "Vehicle",
+                        principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ParkingRecords_ReservedSpotId",
-                table: "ParkingRecords",
+                name: "IX_ParkingSpots_VehicleId",
+                table: "ParkingSpots",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_ReservedSpotId",
+                table: "Reservations",
                 column: "ReservedSpotId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ParkingRecords_VehicleId",
-                table: "ParkingRecords",
+                name: "IX_Reservations_VehicleId",
+                table: "Reservations",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ParkingSpot_VehicleId",
-                table: "ParkingSpot",
-                column: "VehicleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicle_OwnerId",
-                table: "Vehicle",
+                name: "IX_Vehicles_OwnerId",
+                table: "Vehicles",
                 column: "OwnerId");
         }
 
@@ -124,16 +125,16 @@ namespace Web_Parkovka_Project.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ParkingRecords");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
-                name: "ParkingSpot");
+                name: "ParkingSpots");
 
             migrationBuilder.DropTable(
-                name: "Vehicle");
+                name: "Vehicles");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }
