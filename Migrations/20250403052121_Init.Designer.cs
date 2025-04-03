@@ -12,7 +12,7 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250402204210_Init")]
+    [Migration("20250403052121_Init")]
     partial class Init
     {
         /// <inheritdoc />
