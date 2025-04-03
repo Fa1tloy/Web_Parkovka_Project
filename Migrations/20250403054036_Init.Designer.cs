@@ -12,7 +12,7 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250403052121_Init")]
+    [Migration("20250403054036_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -69,14 +69,9 @@ namespace Web_Parkovka_Project.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ReservedSpotId");
-
-                    b.HasIndex("VehicleId");
 
                     b.ToTable("Reservations");
                 });
@@ -163,15 +158,7 @@ namespace Web_Parkovka_Project.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web_Parkovka_Project.Model.Vehicle", "ReservedVehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ReservedSpot");
-
-                    b.Navigation("ReservedVehicle");
                 });
 
             modelBuilder.Entity("Web_Parkovka_Project.Model.Vehicle", b =>

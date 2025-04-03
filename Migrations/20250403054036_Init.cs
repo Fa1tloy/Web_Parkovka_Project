@@ -79,7 +79,6 @@ namespace Web_Parkovka_Project.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: false),
                     SpotId = table.Column<int>(type: "int", nullable: false),
                     ReservedSpotId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -90,12 +89,6 @@ namespace Web_Parkovka_Project.Migrations
                         name: "FK_Reservations_ParkingSpots_ReservedSpotId",
                         column: x => x.ReservedSpotId,
                         principalTable: "ParkingSpots",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reservations_Vehicles_VehicleId",
-                        column: x => x.VehicleId,
-                        principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -109,11 +102,6 @@ namespace Web_Parkovka_Project.Migrations
                 name: "IX_Reservations_ReservedSpotId",
                 table: "Reservations",
                 column: "ReservedSpotId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservations_VehicleId",
-                table: "Reservations",
-                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_OwnerId",
