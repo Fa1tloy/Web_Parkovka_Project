@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
         public required int Number { get; set; } ///номер парковочного места
-        public required bool IsOccupied { get; set; } ///занятость
-        public int? VehicleId { get; set; }
-        public Vehicle OccupiedBy { get; set; } ///каждое парковочное место связано с конкретным транспортным средством, которое его занимает
+        public bool IsOccupied { get; set; } ///занятость
+        public int VehicleId { get; set; }
+        public Vehicle? OccupiedBy { get; set; } ///каждое парковочное место связано с конкретным транспортным средством, которое его занимает
     }
 }
