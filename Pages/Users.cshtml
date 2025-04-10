@@ -1,0 +1,33 @@
+﻿@page
+@model Web_Parkovka_Project.Pages.UsersModel
+@{
+}
+
+<h2>Пользователи</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Page("User", new { id = 0 })">Добавить пользователя</a>
+</p>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var user in Model.Users)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@user.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@user.Surname</h6>
+                    <p class="card-text">Грамм: @user.Patronymic</p>
+                    <p class="card-text">Цена: @user.Email</p>
+                    <p class="card-text">Цена: @user.PhoneNumber</p>
+                    <p class="card-text">Цена: @user.Vehicles</p>
+
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="@Url.Page("User", new { id = user.Id })" class="btn btn-warning">Изменить</a>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '@Url.Page("UserDelete", new { id = user.Id })'; }">Удалить</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
