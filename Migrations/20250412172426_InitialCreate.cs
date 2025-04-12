@@ -79,14 +79,15 @@ namespace Web_Parkovka_Project.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SpotId = table.Column<int>(type: "int", nullable: false)
+                    SpotId = table.Column<int>(type: "int", nullable: false),
+                    ReservedSpotId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_ParkingSpots_SpotId",
-                        column: x => x.SpotId,
+                        name: "FK_Reservations_ParkingSpots_ReservedSpotId",
+                        column: x => x.ReservedSpotId,
                         principalTable: "ParkingSpots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -95,13 +96,12 @@ namespace Web_Parkovka_Project.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ParkingSpots_VehicleId",
                 table: "ParkingSpots",
-                column: "VehicleId",
-                unique: true);
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_SpotId",
+                name: "IX_Reservations_ReservedSpotId",
                 table: "Reservations",
-                column: "SpotId");
+                column: "ReservedSpotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_OwnerId",

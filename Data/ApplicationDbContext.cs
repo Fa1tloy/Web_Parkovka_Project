@@ -22,23 +22,6 @@ namespace Web_Parkovka_Project.Data
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Настройка связей
-            modelBuilder.Entity<Vehicle>()
-                .HasOne(v => v.Owner)
-                .WithMany(u => u.Vehicles)
-                .HasForeignKey(v => v.OwnerId);
-
-            modelBuilder.Entity<ParkingSpot>()
-                .HasOne(p => p.OccupiedBy)
-                .WithOne()
-                .HasForeignKey<ParkingSpot>(p => p.VehicleId);
-
-            modelBuilder.Entity<Reservation>()
-                .HasOne(r => r.ReservedSpot)
-                .WithMany()
-                .HasForeignKey(r => r.SpotId);
-        }
+            
     }
 }

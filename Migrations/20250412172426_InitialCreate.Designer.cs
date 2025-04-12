@@ -12,7 +12,7 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250412164400_InitialCreate")]
+    [Migration("20250412172426_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -44,8 +44,7 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehicleId")
-                        .IsUnique();
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("ParkingSpots");
                 });
@@ -61,6 +60,9 @@ namespace Web_Parkovka_Project.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ReservedSpotId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SpotId")
                         .HasColumnType("int");
 
@@ -69,7 +71,7 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpotId");
+                    b.HasIndex("ReservedSpotId");
 
                     b.ToTable("Reservations");
                 });
@@ -145,8 +147,8 @@ namespace Web_Parkovka_Project.Migrations
             modelBuilder.Entity("Web_Parkovka_Project.Model.ParkingSpot", b =>
                 {
                     b.HasOne("Web_Parkovka_Project.Model.Vehicle", "OccupiedBy")
-                        .WithOne()
-                        .HasForeignKey("Web_Parkovka_Project.Model.ParkingSpot", "VehicleId")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -157,7 +159,7 @@ namespace Web_Parkovka_Project.Migrations
                 {
                     b.HasOne("Web_Parkovka_Project.Model.ParkingSpot", "ReservedSpot")
                         .WithMany()
-                        .HasForeignKey("SpotId")
+                        .HasForeignKey("ReservedSpotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
