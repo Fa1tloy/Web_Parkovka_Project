@@ -12,8 +12,8 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250403054036_Init")]
-    partial class Init
+    [Migration("20250412164400_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,7 +44,8 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehicleId");
+                    b.HasIndex("VehicleId")
+                        .IsUnique();
 
                     b.ToTable("ParkingSpots");
                 });
@@ -60,9 +61,6 @@ namespace Web_Parkovka_Project.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReservedSpotId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SpotId")
                         .HasColumnType("int");
 
@@ -71,7 +69,7 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReservedSpotId");
+                    b.HasIndex("SpotId");
 
                     b.ToTable("Reservations");
                 });
@@ -90,11 +88,13 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Patronymic")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -102,7 +102,8 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -123,11 +124,13 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.Property<string>("Make")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -142,8 +145,8 @@ namespace Web_Parkovka_Project.Migrations
             modelBuilder.Entity("Web_Parkovka_Project.Model.ParkingSpot", b =>
                 {
                     b.HasOne("Web_Parkovka_Project.Model.Vehicle", "OccupiedBy")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
+                        .WithOne()
+                        .HasForeignKey("Web_Parkovka_Project.Model.ParkingSpot", "VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -154,7 +157,7 @@ namespace Web_Parkovka_Project.Migrations
                 {
                     b.HasOne("Web_Parkovka_Project.Model.ParkingSpot", "ReservedSpot")
                         .WithMany()
-                        .HasForeignKey("ReservedSpotId")
+                        .HasForeignKey("SpotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

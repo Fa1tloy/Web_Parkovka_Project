@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Web_Parkovka_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,9 +17,9 @@ namespace Web_Parkovka_Project.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Patronymic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Patronymic = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -34,8 +34,8 @@ namespace Web_Parkovka_Project.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Make = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LicensePlate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OwnerId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -79,15 +79,14 @@ namespace Web_Parkovka_Project.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SpotId = table.Column<int>(type: "int", nullable: false),
-                    ReservedSpotId = table.Column<int>(type: "int", nullable: false)
+                    SpotId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_ParkingSpots_ReservedSpotId",
-                        column: x => x.ReservedSpotId,
+                        name: "FK_Reservations_ParkingSpots_SpotId",
+                        column: x => x.SpotId,
                         principalTable: "ParkingSpots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -96,12 +95,13 @@ namespace Web_Parkovka_Project.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ParkingSpots_VehicleId",
                 table: "ParkingSpots",
-                column: "VehicleId");
+                column: "VehicleId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_ReservedSpotId",
+                name: "IX_Reservations_SpotId",
                 table: "Reservations",
-                column: "ReservedSpotId");
+                column: "SpotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_OwnerId",

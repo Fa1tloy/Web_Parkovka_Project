@@ -14,7 +14,7 @@ namespace Web_Parkovka_Project.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            //Database.Migrate(); // Автоматически применяет миграции и создаёт базу, если её нет
+          //  Database.Migrate(); // Автоматически применяет миграции и создаёт базу, если её нет
         }
 
         public DbSet<User> Users { get; set; }
