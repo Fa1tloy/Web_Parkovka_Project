@@ -1,6 +1,7 @@
 
-
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Web_Parkovka_Project.AutoMapper;
 using Web_Parkovka_Project.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,3 +28,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+// Добавьте эту строку:
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddControllers();
