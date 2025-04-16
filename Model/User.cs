@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Web_Parkovka_Project.Model
 {
-    public class User ///пользователь, он же владелец транспортного средства
+    public class User : IdentityUser<int> ///пользователь, он же владелец транспортного средства
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Имя обязательно для заполнения.")]
         [StringLength(50, ErrorMessage = "Имя не должно превышать 50 символов.")]
         public required string Name { get; set; } ///имя пользователя
