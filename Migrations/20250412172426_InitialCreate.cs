@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Web_Parkovka_Project.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:Migrations/20250416173053_Inite.cs
     public partial class Inite : Migration
+========
+    public partial class InitialCreate : Migration
+>>>>>>>> AddPageForInformationParking:Migrations/20250412172426_InitialCreate.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

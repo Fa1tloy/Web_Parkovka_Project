@@ -12,8 +12,13 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:Migrations/20250416173053_Inite.Designer.cs
     [Migration("20250416173053_Inite")]
     partial class Inite
+========
+    [Migration("20250412172426_InitialCreate")]
+    partial class InitialCreate
+>>>>>>>> AddPageForInformationParking:Migrations/20250412172426_InitialCreate.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +112,7 @@ namespace Web_Parkovka_Project.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+<<<<<<<< HEAD:Migrations/20250416173053_Inite.Designer.cs
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(max)");
@@ -116,6 +122,8 @@ namespace Web_Parkovka_Project.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+========
+>>>>>>>> AddPageForInformationParking:Migrations/20250412172426_InitialCreate.Designer.cs
 
                     b.Property<string>("Patronymic")
                         .IsRequired()
@@ -136,12 +144,15 @@ namespace Web_Parkovka_Project.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+<<<<<<<< HEAD:Migrations/20250416173053_Inite.Designer.cs
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
+========
+>>>>>>>> AddPageForInformationParking:Migrations/20250412172426_InitialCreate.Designer.cs
 
                     b.HasKey("Id");
 
