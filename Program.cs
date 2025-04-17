@@ -8,7 +8,6 @@ using Web_Parkovka_Project.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -32,18 +31,19 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
-app.UseHttpsRedirection(); // 1. Перенаправление на HTTPS
-app.UseStaticFiles();      // 2. Обслуживание статических файлов (CSS, JS, изображения)
 
-app.UseRouting();          // 3. Маршрутизация
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-app.UseAuthentication();   // 4. Аутентификация (ДО авторизации!)
-app.UseAuthorization();    // 5. Авторизация
+app.UseRouting();
 
-app.MapRazorPages();       // 6. Маппинг Razor Pages
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
+app.MapControllers();
 
 app.Run();
 
-// Добавьте эту строку:
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddControllers();
