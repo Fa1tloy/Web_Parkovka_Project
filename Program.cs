@@ -24,6 +24,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,6 +47,3 @@ app.MapRazorPages();
 app.MapControllers();
 
 app.Run();
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddControllers();
