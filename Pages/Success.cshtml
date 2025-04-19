@@ -1,13 +1,13 @@
 ﻿@page
-@model Web_Parkovka_Project.Pages.SuccessModel
+@model Web_Parkovka_Project.Pages.ParkingInfoSuccessModel
 @{
-    ViewData["Title"] = "Успешное сохранение";
+    ViewData["Title"] = "Parking Information Saved";
 }
 
-<div class="container mt-5">
-    <div class="alert alert-success">
-        <h2>Данные успешно сохранены!</h2>
-        <p>Информация о парковке была сохранена в базу данных.</p>
-        <a href="/ParkingForm" class="btn btn-primary">Добавить еще</a>
-    </div>
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-success">
+    Parking information has been successfully saved to the database.
 </div>
+
+<a asp-page="/ParkingInfoModel class="btn btn-primary">Add Another Parking Record</a>
