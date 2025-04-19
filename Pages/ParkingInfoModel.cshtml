@@ -1,58 +1,59 @@
 ﻿@page
 @model Web_Parkovka_Project.Pages.ParkingInfoModel
 @{
-    ViewData["Title"] = "Parking Information";
+    ViewData["Title"] = "Добавление информации о парковке";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <form method="post">
     <div class="form-group">
-        <h3>Vehicle Information</h3>
-        <label asp-for="Vehicle.Make">Марка</label>
-        <input asp-for="Vehicle.Make" class="form-control" />
-        <span asp-validation-for="Vehicle.Make" class="text-danger"></span>
-        
-        <label asp-for="Vehicle.Model">Модель</label>
-        <input asp-for="Vehicle.Model" class="form-control" />
-        <span asp-validation-for="Vehicle.Model" class="text-danger"></span>
-        
-        <label asp-for="Vehicle.LicensePlate">Номер машины</label>
-        <input asp-for="Vehicle.LicensePlate" class="form-control" />
-        <span asp-validation-for="Vehicle.LicensePlate" class="text-danger"></span>
+        <h3>Информация о транспортном средстве</h3>
+
+        <label asp-for="ViewModel.VehicleMake">Марка</label>
+        <input asp-for="ViewModel.VehicleMake" class="form-control" />
+        <span asp-validation-for="ViewModel.VehicleMake" class="text-danger"></span>
+
+        <label asp-for="ViewModel.VehicleModel">Модель</label>
+        <input asp-for="ViewModel.VehicleModel" class="form-control" />
+        <span asp-validation-for="ViewModel.VehicleModel" class="text-danger"></span>
+
+        <label asp-for="ViewModel.VehicleLicensePlate">Номерной знак</label>
+        <input asp-for="ViewModel.VehicleLicensePlate" class="form-control" />
+        <span asp-validation-for="ViewModel.VehicleLicensePlate" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <h3>Parking Spot</h3>
-        <label asp-for="ParkingSpot.Number">Парковочный номер</label>
-        <input asp-for="ParkingSpot.Number" class="form-control" />
-        <span asp-validation-for="ParkingSpot.Number" class="text-danger"></span>
+        <h3>Парковочное место</h3>
+        <label asp-for="ViewModel.ParkingSpotNumber">Номер места</label>
+        <input asp-for="ViewModel.ParkingSpotNumber" class="form-control" />
+        <span asp-validation-for="ViewModel.ParkingSpotNumber" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <h3>Owner Information</h3>
-        <label asp-for="User.Name">Имя</label>
-        <input asp-for="User.Name" class="form-control" />
-        <span asp-validation-for="User.Name" class="text-danger"></span>
-        
-        <label asp-for="User.Surname">Фамилия</label>
-        <input asp-for="User.Surname" class="form-control" />
-        <span asp-validation-for="User.Surname" class="text-danger"></span>
-        
-        <label asp-for="User.Patronymic">Отчество</label>
-        <input asp-for="User.Patronymic" class="form-control" />
-        <span asp-validation-for="User.Patronymic" class="text-danger"></span>
-        
-        <label asp-for="User.Email">Почта</label>
-        <input asp-for="User.Email" class="form-control" />
-        <span asp-validation-for="User.Email" class="text-danger"></span>
-        
-        <label asp-for="User.PhoneNumber">Номер телефона</label>
-        <input asp-for="User.PhoneNumber" class="form-control" />
-        <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+        <h3>Информация о владельце</h3>
+        <label asp-for="ViewModel.UserName">Имя</label>
+        <input asp-for="ViewModel.UserName" class="form-control" />
+        <span asp-validation-for="ViewModel.UserName" class="text-danger"></span>
+
+        <label asp-for="ViewModel.UserSurname">Фамилия</label>
+        <input asp-for="ViewModel.UserSurname" class="form-control" />
+        <span asp-validation-for="ViewModel.UserSurname" class="text-danger"></span>
+
+        <label asp-for="ViewModel.UserPatronymic">Отчество</label>
+        <input asp-for="ViewModel.UserPatronymic" class="form-control" />
+        <span asp-validation-for="ViewModel.UserPatronymic" class="text-danger"></span>
+
+        <label asp-for="ViewModel.UserEmail">Email</label>
+        <input asp-for="ViewModel.UserEmail" class="form-control" />
+        <span asp-validation-for="ViewModel.UserEmail" class="text-danger"></span>
+
+        <label asp-for="ViewModel.UserPhone">Телефон</label>
+        <input asp-for="ViewModel.UserPhone" class="form-control" />
+        <span asp-validation-for="ViewModel.UserPhone" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save Parking Information</button>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
 </form>
 
 @section Scripts {

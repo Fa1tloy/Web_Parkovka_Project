@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Web_Parkovka_Project.Data;
+using Web_Parkovka_Project.Models;
 using Web_Parkovka_Project.Model;
 
 namespace Web_Parkovka_Project.Pages
@@ -15,20 +16,11 @@ namespace Web_Parkovka_Project.Pages
         }
 
         [BindProperty]
-        public Vehicle Vehicle { get; set; }
-
-        [BindProperty]
-        public ParkingSpot ParkingSpot { get; set; }
-
-        [BindProperty]
-        public User User { get; set; }
+        public ParkingInfoViewModel ViewModel { get; set; }
 
         public void OnGet()
         {
-            // Initialize empty objects for new entry
-            Vehicle = new Vehicle() { LicensePlate = "" , Make = "" , Model ="" };
-            ParkingSpot = new ParkingSpot() { Number = 0 };
-            User = new User() { Name = "", Surname = "", Patronymic = "", Email = "", PhoneNumber = "", Vehicles = new List<Vehicle>() };
+            ViewModel = new ParkingInfoViewModel();
         }
 
         public IActionResult OnPost()
@@ -38,32 +30,45 @@ namespace Web_Parkovka_Project.Pages
                 return Page();
             }
 
-            // Check if user with this email already exists
-            var existingUser = _context.Users.FirstOrDefault(u => u.Email == User.Email);
-            if (existingUser != null)
+            // 1. Создаем/находим пользователя
+            var user = _context.Users.FirstOrDefault(u => u.Email == ViewModel.UserEmail);
+            if (user == null)
             {
-                // Use existing user
-                User = existingUser;
-            }
-            else
-            {
-                // Add new user
-                _context.Users.Add(User);
+                user = new User
+                {
+                    Name = ViewModel.UserName,
+                    Surname = ViewModel.UserSurname,
+                    Patronymic = ViewModel.UserPatronymic,
+                    Email = ViewModel.UserEmail,
+                    PhoneNumber = ViewModel.UserPhone,
+                    UserName = ViewModel.UserEmail
+                };
+                _context.Users.Add(user);
                 _context.SaveChanges();
             }
 
-            // Set vehicle owner
-            Vehicle.OwnerId = User.Id;
-            _context.Vehicles.Add(Vehicle);
+            // 2. Создаем транспортное средство
+            var vehicle = new Vehicle
+            {
+                Make = ViewModel.VehicleMake,
+                Model = ViewModel.VehicleModel,
+                LicensePlate = ViewModel.VehicleLicensePlate,
+                OwnerId = user.Id
+            };
+            _context.Vehicles.Add(vehicle);
             _context.SaveChanges();
 
-            // Set parking spot
-            ParkingSpot.IsOccupied = true;
-            ParkingSpot.VehicleId = Vehicle.Id;
-            _context.ParkingSpots.Add(ParkingSpot);
+            // 3. Создаем парковочное место
+            var parkingSpot = new ParkingSpot
+            {
+                Number = ViewModel.ParkingSpotNumber,
+                IsOccupied = true,
+                VehicleId = vehicle.Id
+            };
+            _context.ParkingSpots.Add(parkingSpot);
             _context.SaveChanges();
 
-            return RedirectToPage("ParkingInfoSuccessModel");
+            return RedirectToPage("ParkingInfoSuccess");
         }
     }
 }
