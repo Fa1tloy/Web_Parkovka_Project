@@ -45,5 +45,33 @@ namespace Web_Parkovka_Project.Controllers
             var userResponse = _mapper.Map<UserResponseDTO>(user);
             return Ok(userResponse);
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _signInManager.PasswordSignInAsync(
+                loginDto.Email,
+                loginDto.Password,
+                loginDto.RememberMe,
+                lockoutOnFailure: false);
+
+            if (!result.Succeeded)
+                return Unauthorized("Неверные учетные данные");
+
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var userResponse = _mapper.Map<UserResponseDTO>(user);
+
+            return Ok(userResponse);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok(new { Message = "Выход выполнен успешно" });
+        }
     }
 }
