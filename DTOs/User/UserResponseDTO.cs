@@ -9,5 +9,6 @@
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string FullName => $"{Surname} {Name} {Patronymic}".Trim();
+        public List<VehicleDTO> Vehicles { get; set; } = new List<VehicleDTO>();
     }
 }
