@@ -15,15 +15,15 @@ namespace Web_Parkovka_Project.Model
 
 
         [StringLength(50, ErrorMessage = "Отчество не должно превышать 50 символов.")]
-        public string Patronymic { get; set; } ///отчество пользователя
+        public string? Patronymic { get; set; } ///отчество пользователя
 
         [Required(ErrorMessage = "Электронная почта обязательна для заполнения.")]
         [EmailAddress(ErrorMessage = "Некорректный формат электронной почты.")]
-        public string Email { get; set; } ///эл.почта пользователя
+        public override string? Email { get; set; } ///эл.почта пользователя
 
         [Required(ErrorMessage = "Номер телефона обязателен для заполнения.")]
         [Phone(ErrorMessage = "Некорректный формат номера телефона.")]
-        public string PhoneNumber { get; set; } ///номер телефона пользователя
+        public override string? PhoneNumber { get; set; } ///номер телефона пользователя
 
         public List<Vehicle> Vehicles { get; set; } = new List<Vehicle>(); ///что каждый пользователь может владеть несколькими транспортными средствами
     }

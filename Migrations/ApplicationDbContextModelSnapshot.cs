@@ -252,7 +252,6 @@ namespace Web_Parkovka_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Patronymic")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
