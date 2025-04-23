@@ -12,8 +12,8 @@ using Web_Parkovka_Project.Data;
 namespace Web_Parkovka_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250419110610_UpdateIdentitySchema")]
-    partial class UpdateIdentitySchema
+    [Migration("20250423145144_Inite")]
+    partial class Inite
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,7 +255,6 @@ namespace Web_Parkovka_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Patronymic")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
