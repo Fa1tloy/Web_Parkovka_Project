@@ -7,7 +7,7 @@ using Web_Parkovka_Project.Model;
 
 namespace Web_Parkovka_Project.Pages
 {
-    public class StudentModel(ApplicationDbContext context, IHubContext<ChatHub> hubContext) : PageModel
+    public class UserModel(ApplicationDbContext context, IHubContext<ChatHub> hubContext) : PageModel
     {
         private readonly ApplicationDbContext _context = context;
         private readonly IHubContext<ChatHub> _hubContext = hubContext;
@@ -40,6 +40,7 @@ namespace Web_Parkovka_Project.Pages
                 _context.Users.Update(User);
             }
             _context.SaveChanges();
+            _hubContext.Clients.All.SendAsync("Receive", "usr", "msg");
             return RedirectToPage("Users");
         }
     }
