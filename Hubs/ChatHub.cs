@@ -10,7 +10,7 @@ namespace Web_Parkovka_Project.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            var userName = Context.User?.Identity?.Name ?? "Аноним";
+            var userName = Context.User?.Identity?.Name ?? "Аноним"; 
             if (!ConnectedUsers.Contains(userName))
             {
                 ConnectedUsers.Add(userName);
