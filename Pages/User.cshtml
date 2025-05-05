@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model Web_Parkovka_Project.Pages.UserModel
 @{
 }
@@ -45,5 +45,9 @@
         <span asp-validation-for="User.Vehicles" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <div class="d-flex gap-2 justify-content-center mt-4">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a asp-page="/Students" class="btn btn-outline-secondary px-4">Отмена</a>
+    </div>
+    
 </form>

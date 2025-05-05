@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Web_Parkovka_Project.AutoMapper;
 using Web_Parkovka_Project.Data;
+using Web_Parkovka_Project.Hubs;
 using Web_Parkovka_Project.Model;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ParckingBD")));
+builder.Services.AddSignalR();
 
 builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 {
@@ -40,6 +42,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
+app.MapHub<ChatHub>("/chatHub");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
