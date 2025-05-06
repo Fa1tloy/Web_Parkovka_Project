@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Parkovka_Project", "Web_Parkovka_Project.csproj", "{37E4A655-A6DD-4D0C-A5BF-ACC6A595DF48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Parkovka_Project_tests", "..\Web_Parkovka_Project_tests\Web_Parkovka_Project_tests.csproj", "{B5193D44-EDBB-40E0-89AD-0E2695B83B43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{37E4A655-A6DD-4D0C-A5BF-ACC6A595DF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37E4A655-A6DD-4D0C-A5BF-ACC6A595DF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37E4A655-A6DD-4D0C-A5BF-ACC6A595DF48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5193D44-EDBB-40E0-89AD-0E2695B83B43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5193D44-EDBB-40E0-89AD-0E2695B83B43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5193D44-EDBB-40E0-89AD-0E2695B83B43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5193D44-EDBB-40E0-89AD-0E2695B83B43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
