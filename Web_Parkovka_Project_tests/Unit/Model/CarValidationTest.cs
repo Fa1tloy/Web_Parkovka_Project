@@ -21,7 +21,7 @@ namespace Web_Parkovka_Project_tests.Unit.Model
                 LicensePlate = "A12345",
             };
 
-            // Создаем контекст валидации на основе объекта
+            // Создаем контекст валидации на основе объекта     
             var context = new ValidationContext(car);
 
             // Сюда будут записаны ошибки валидации, если они есть
