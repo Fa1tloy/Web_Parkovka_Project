@@ -10,14 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Functional\**" />
+    <Compile Remove="Integration\**" />
+    <EmbeddedResource Remove="Functional\**" />
+    <EmbeddedResource Remove="Integration\**" />
+    <None Remove="Functional\**" />
+    <None Remove="Integration\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Web_Parkovka_Project\Web_Parkovka_Project.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,9 +31,10 @@
 
   <ItemGroup>
     <Folder Include="E2E\" />
-    <Folder Include="Functional\" />
-    <Folder Include="Integration\Data\" />
-    <Folder Include="Integration\Pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\parkovka\Web_Parkovka_Project.csproj" />
   </ItemGroup>
 
 </Project>
