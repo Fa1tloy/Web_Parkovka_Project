@@ -18,12 +18,8 @@
                         </div>
                     </div>
                     <h3 class="mb-1">@Model.CurrentUser.FullName</h3>
-                    <p class="text-muted mb-3">@Model.CurrentUser.Email</p>
-                    <div class="d-grid">
-                        <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                            <i class="bi bi-pencil-square me-2"></i>Редактировать профиль
-                        </button>
-                    </div>
+                    <p class="text-muted mb-0">@Model.CurrentUser.Email</p>
+                    <p class="text-muted">@Model.CurrentUser.PhoneNumber</p>
                 </div>
             </div>
         </div>
@@ -57,8 +53,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="info-item">
-                                <label class="text-muted small mb-1">Телефон</label>
-                                <p class="mb-0 fw-medium">@Model.CurrentUser.PhoneNumber</p>
+                                <label class="text-muted small mb-1">Email</label>
+                                <p class="mb-0 fw-medium">@Model.CurrentUser.Email</p>
                             </div>
                         </div>
                     </div>
@@ -201,18 +197,7 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        // Инициализация модальных окон
+        // Инициализация модального окна
         var addVehicleModal = new bootstrap.Modal(document.getElementById('addVehicleModal'));
-        var editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
-
-        // Показать модальное окно редактирования при наличии ошибок
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <text>
-                document.addEventListener('DOMContentLoaded', function() {
-                    editProfileModal.show();
-                });
-            </text>
-        }
     </script>
 }
