@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Web_Parkovka_Project.Model;
 
 namespace Web_Parkovka_Project.Pages
 {
@@ -8,13 +10,20 @@ namespace Web_Parkovka_Project.Pages
     [Authorize]
     public class ChatModel : PageModel
     {
-        public string UserName { get; set; } = "Аноним";
+        private readonly UserManager<User> _userManager;
+        public string UserName { get; set; } = "Гость";
 
-        public void OnGet()
+        public ChatModel(UserManager<User> userManager)
+        {
+            _userManager = userManager;
+        }
+
+        public async Task OnGet()
         {
             if (User.Identity?.IsAuthenticated ?? false)
             {
-                UserName = User.Identity.Name!;
+                var user = await _userManager.GetUserAsync(User);
+                UserName = user?.Name ?? "Гость";
             }
         }
     }
