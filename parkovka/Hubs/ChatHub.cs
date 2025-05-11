@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using Web_Parkovka_Project.Model;
 
@@ -7,10 +8,18 @@ namespace Web_Parkovka_Project.Hubs
     public class ChatHub : Hub
     {
         private static readonly List<string> ConnectedUsers = new List<string>();
+        private readonly UserManager<User> _userManager;
+
+        public ChatHub(UserManager<User> userManager)
+        {
+            _userManager = userManager;
+        }
 
         public override async Task OnConnectedAsync()
         {
-            var userName = Context.User?.Identity?.Name ?? "Аноним"; 
+            var user = await _userManager.GetUserAsync(Context.User);
+            var userName = user?.Name ?? "Аноним";
+
             if (!ConnectedUsers.Contains(userName))
             {
                 ConnectedUsers.Add(userName);
@@ -21,7 +30,9 @@ namespace Web_Parkovka_Project.Hubs
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            var userName = Context.User?.Identity?.Name ?? "Аноним";
+            var user = await _userManager.GetUserAsync(Context.User);
+            var userName = user?.Name ?? "Аноним";
+
             if (ConnectedUsers.Contains(userName))
             {
                 ConnectedUsers.Remove(userName);
